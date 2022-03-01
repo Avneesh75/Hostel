@@ -1,57 +1,65 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <title>Document</title>
 </head>
 <body>
     <div class="container">
-    <h2>Registration Form</h2>
+    <center><h2>Registration Form</h2></center>
+    <center><h4 style="color:red">{{msg}}</h4></center>
     <div class="form-container"></div>
-    <form action="">
+    <form action="{% url 'userregister' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
         <div class="input-name">
             <i class="fa fa-user icon"></i>
-            <input type="text" placeholder="First Name" class="name">
+            <input type="text" placeholder="First Name" class="name" name="fname">
             <span>
                 <i class="fa fa-user icon"></i>
-            <input type="text" placeholder="Last Name" class="name">
+            <input type="text" placeholder="Last Name" class="name" name="lname">
             </span>
         </div>
         <div class="input-name">
             <i class="fa fa-book"></i>
-            <input type="text" placeholder="Course" class="name">
+            <input type="password" placeholder="Password" class="name" name="password">
             <span>
                 <i class="fa fa-columns"></i>
-            <input type="number" placeholder="Roll no." class="name">
-            </span>
+                <input type="password" placeholder="Confirm Password" class="name" name="cpassword">
+            </span> 
         </div>
             <div class="input-name">
                 <i class="fa fa-envelope email icon"></i>
-                <input type="email" placeholder="Email" required class="text-name">
+                <input type="email" placeholder="Email" required class="text-name" name="email">
             </div>
             <div class="input-name">
                 <i class="fa fa-phone"></i>
-                <input type="tel" placeholder="Phone" required class="text-name">
+                <input type="tel" placeholder="Contact" required class="text-name" name="contact">
             </div>
             <div class="input-name">
+                <i class="fa fa-book"></i>
+                <input type="text" placeholder="Course" required class="name" name="course">
+            </div>
+            
+            <div class="input-name">
                 <i class="	fa fa-calendar"></i>
-                <input type="number" placeholder="Date of Birth" required class="text-name">
+                <input type="date" placeholder="Date of Birth" required class="text-name" name="dob">
             </div>
             <div class="input-name">
                 <i class="fa fa-address-card"></i>
-                <input type="number" placeholder="Adhaar no." required class="text-name">
+                <input type="file" placeholder="Adhaar no." required class="text-name" name="adhar_no">
             </div>
             <div class="input-name">
                 <strong>Gender:</strong>
-                 <input type="radio" class="radio button" name="r1">
+                 <input type="radio" class="radio button" value="male" name="g">
                  <label for="">Male</label>
                 
-                <input type="radio" class="radio button" name="r1">
+                <input type="radio" class="radio button" value="female" name="g">
                 <label for="">Female</label>
                 </div>
             <div class="input-name">

@@ -1,21 +1,24 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <link rel="stylesheet" href="login.css"/>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}"/>
   </head>
   <body>
     <div class="container">
       <div class="wrapper">
-        <div class="title"><span>Admin Login</span></div>
-        <form action="#">
+        <div class="title"><span>Student Login</span></div>
+        <center><h3 style="color:red">{{msg}}</h3></center>
+        <form action="{% url 'userlogin' %}" method="post">
+          {% csrf_token %}
           <div class="row">
-            <input type="text" placeholder="User Id" required>
+            <input type="text" placeholder="Email" required name="email">
           </div>
           <div class="row">
-            <input type="password" placeholder="Password" required>
+            <input type="password" placeholder="Password" required name="password">
           </div>
           <div class="pass"><a href="#">Forgot password?</a></div>
           <div class="row button">

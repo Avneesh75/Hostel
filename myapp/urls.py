@@ -1,16 +1,18 @@
+from unicodedata import name
 from django import views
 from django.contrib import admin
 from django.urls import path,include
 from .import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path(" ",views.Index),
-    path('home/',views.Home),
+    path("",views.Home,name="Home"),
+    path("index/",views.Index),
     path('register/',views.Register),
-    path('login/',views.Login),
+    path('userregister/',views.UserRegister,name='userregister'),
+    path('login/',views.Login,name="login"),
+    path('userlogin/',views.UserLogin,name='userlogin'),
     path('room/',views.Room),
-    path('visitors/',views.Visitors),
+    path('visitors/',views.Visitors,name="visitors"),
     path('admindash/',views.Admindash),
 
 ]
