@@ -1,3 +1,4 @@
+from email.message import Message
 from tkinter.messagebox import YES
 from django.db import models
 from django.contrib.auth.models import User
@@ -27,6 +28,16 @@ class Room(models.Model):
     Rent = models.CharField(max_length=5)
     Floor = models.CharField(max_length=5)
     Image = models.ImageField(upload_to='room_img',null=True)
+
+class Contact(models.Model):
+    Firstname = models.CharField(max_length=20)
+    Lastname = models.CharField(max_length=20)
+    Contact = models.CharField(max_length=15)
+    Email = models.EmailField(max_length=50)
+    Message = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.Email,self.Firstname
 
 class Booking(models.Model):
     user = models.ForeignKey(User,models.CASCADE)

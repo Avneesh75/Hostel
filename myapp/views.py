@@ -1,6 +1,6 @@
 from operator import imod
 from django.shortcuts import redirect, render
-from .models import Student
+from .models import Student,Contact
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
@@ -80,5 +80,44 @@ def Visitors(request):
 
 def Admindash(request):
     return render(request,'admindash.html')
+
+
+def Contactus(request):
+    if request.method=='POST':
+        fname = request.POST['firstname']
+        lname = request.POST['lastname']
+        email = request.POST['emailadd']
+        contact = request.POST['phoneno']
+        msg= request.POST['message']
+
+        user = Contact.objects.filter(Email=email)
+
+        if user:
+            messages.error(request,"You Send the all details already")
+            return render(request,'home.html')
+        
+        else:
+            newuser = Contact.objects.create(Firstname=fname,
+                                                Lastname=lname,
+                                                Contact=contact,
+                                                Email=email,
+                                                Message=msg    
+                                            )
+            messages.success(request,"Request sent Successfully")
+            return redirect("Home")
+
+def logout_view(request):
+    logout(request)
+    return redirect("Home")
+
+def Edit(request):
+        return render(request,"edit.html")
+    
+
+
+# def Edit(request):
+#     if request.user.is_superuser:
+#         return render(request,"edit.html")
+#     else:
 
 
