@@ -1,5 +1,5 @@
 from operator import imod
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render,HttpResponse
 from .models import Student,Contact
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout
@@ -112,12 +112,11 @@ def logout_view(request):
 
 def Edit(request):
         return render(request,"edit.html")
-    
 
-
-# def Edit(request):
-#     if request.user.is_superuser:
-#         return render(request,"edit.html")
-#     else:
+def StudentReg(request):
+    if request.user.is_superuser:
+        return render(request,"adminreg.html")
+    else:
+        pass
 
 

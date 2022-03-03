@@ -16,5 +16,6 @@ urlpatterns = [
     path('room/',views.Room),
     path('visitors/',views.Visitors,name="visitors"),
     path('admindash/',views.Admindash),
-    path('contactus/',views.Contactus,name='contact')
+    path('contactus/',views.Contactus,name='contact'),
+    path('studentreg/',views.StudentReg,name='studentreg')
 ]
