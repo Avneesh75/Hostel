@@ -14,33 +14,34 @@
     <div class="container">
     <h2>Room Allotment</h2>
     <div class="form-container"></div>
-    <form action="">
+    <form action="{% url 'roomallocate' %}" method="post" >
+        {% csrf_token %}
         <div class="input-name">
-            <i class="fa fa-user icon"></i>
-            <input type="text" placeholder="First Name" required class="name">
-            <span>
-                <i class="fa fa-user icon"></i>
-            <input type="text" placeholder="Last Name" required class="name">
-            </span>
+            <label for="">Student:</label>
+            <select name="student" id="">
+                {% for user in user %}
+               
+                <option class="form-control" value="{{user.user.id}}">{{user.First_Name}} {{user.Last_Name}}</option>
+                {% endfor %}
+            </select>
         </div>
         <div class="input-name">
-            <i class="fa fa-book"></i>
-            <input type="text" placeholder="Course" required class="name">
+            <label for=""> Room Number:</label>
+            <select name="room" id="">
+                {% for room in room %}
+                <option class="form-control" value="{{room.id}}">{{room.Room_no}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="input-name">
+           
+           
             <span>
                 <i class="fa fa-columns"></i>
-            <input type="number" placeholder="Roll no." required class="name">
+            <input type="number" placeholder="Amount" required class="name" name="amount">
             </span>
         </div>
-        <div class="dropdown">
-            <select name = "dropdown">
-                <option value = "Boys" selected>Boys Hostel</option>
-                <option value = "Girls">Girls Hostel</option>
-             </select>
-        </div>
-            <div class="input-name">
-                <i class="	fa fa-building"></i>
-                <input type="number" placeholder="Room no." required class="text-name">
-            </div>
+           
             <div class="input-name">
                 <input type="submit" class ="button" value="Allot room">
                 <input type="submit" class ="button" value="UnAllot room">

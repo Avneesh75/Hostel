@@ -13,9 +13,14 @@ urlpatterns = [
     path('userlogin/',views.UserLogin,name='userlogin'),
     path('logout/',views.logout_view,name="logout"),
     path('edit/',views.Edit,name="edit"),
-    path('room/',views.Room),
+    path('room/',views.room,name="roomallocate"),
     path('visitors/',views.Visitors,name="visitors"),
     path('admindash/',views.Admindash),
     path('contactus/',views.Contactus,name='contact'),
-    path('studentreg/',views.StudentReg,name='studentreg')
+    path('view-student/',views.view_student,name='view_student'),
+    path('studentreg/',views.StudentReg,name='studentreg'),
+    path('studentlog/',views.Studentlog,name='studentlog'),
+    path('adminreg/',views.AdminReg,name='adminreg'),
+    path('adminlog/',views.AdminLog,name='adminlog'),
+    path('adminedit/<int:id>',views.Adminedit,name='adminedit'),
 ]

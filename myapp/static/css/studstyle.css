@@ -256,7 +256,7 @@ body {
 	color: #3786bd;
 	text-decoration: underline;
 }
-.form-v4-content .form-detail .register {
+.form-v4-content .form-detail .button {
 	background: #3786bd;
 	border-top-left-radius: 5px;
 	border-bottom-right-radius: 5px;
@@ -268,7 +268,7 @@ body {
 	font-weight: 700;
 	font-size: 15px;
 }
-.form-v4-content .form-detail .register:hover {
+.form-v4-content .form-detail .button:hover {
 	background: #2f73a3;
 }
 .form-v4-content .form-detail .form-row-last input {

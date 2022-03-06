@@ -29,6 +29,9 @@ class Room(models.Model):
     Floor = models.CharField(max_length=5)
     Image = models.ImageField(upload_to='room_img',null=True)
 
+    def __str__(self):
+        return self.Room_no
+
 class Contact(models.Model):
     Firstname = models.CharField(max_length=20)
     Lastname = models.CharField(max_length=20)
@@ -39,9 +42,30 @@ class Contact(models.Model):
     def __str__(self):
         return self.Email,self.Firstname
 
+status = (
+    ('pending' ,'pending'),
+    ('allow' ,'allow'),
+    ('disallow' ,'disallow')
+    )
 class Booking(models.Model):
     user = models.ForeignKey(User,models.CASCADE)
     room = models.ForeignKey(Room,models.CASCADE)
-    booking_date = models.DateField()
+    amount = models.CharField(max_length=10,null=True)
+    statu = models.CharField(max_length=10,choices=status, null=True)
+    booking_date = models.DateField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class AdminStudent(models.Model):
+    
+    First_Name = models.CharField(max_length=50,null=False)
+    Last_Name = models.CharField(max_length=50,null=False)
+    Dob = models.DateField(auto_now=False,null=True)
+    Contact = models.CharField(max_length=15,null=False)
+    Aadhar_pic = models.ImageField(upload_to="img/")
+    Profile_pic = models.ImageField(upload_to="img/")
+    Course = models.CharField(max_length=20)
+    #Gender = models.CharField(choices=gender,max_length=15)
+
+    def __str__(self):
+        return self.First_Name
