@@ -1,0 +1,37 @@
+
+{% extends 'base.html' %}
+{% load static %}
+  
+    {% block title %}
+    {% endblock %}
+{% block body %}
+<div class="text-center p-3">
+    <h2>Mess Menu</h2>
+<div class="col-lg-10">
+<div class="row justify-content-around  mt-5" style="margin-left:155px;">   
+<table class="table table-striped ">
+  <thead>
+    <tr>
+      <th scope="col">Day</th>
+      <th scope="col">Item</th>
+      <th scope="col">Price</th>
+      
+      
+    </tr>
+  </thead>
+  {% if mess2 %}
+  <tbody>
+    {% for i in mess2 %}
+    <tr>
+      <td>{{i.day}}</td>
+      <td>{{i.item}}</td>
+      <td>{{i.price}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  {% endif %}
+</table>
+</div>
+</div>
+</div>
+{% endblock %}

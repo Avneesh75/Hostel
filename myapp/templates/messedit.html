@@ -1,0 +1,38 @@
+{% extends 'admindash.html' %}
+{% load static %}
+    {% block title %}
+	
+    {% endblock %}
+{% block content %}
+
+    <div class="page-wrapper bg-red p-t-90 p-b-80 font-robo">
+        <div class="wrapper wrapper--w960">
+            <div class="card card-2">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h2 class="title">Update Mess Menu</h2>
+                    <form method="post" action="">
+                        {% csrf_token %}
+                        {% if mess1 %}
+                        <div class="input-group">
+                            <lable class="input--style-2">Day:</lable>
+                            <input  type="text"  value="{{mess1.day}}"  name="day">
+                        </div>
+                        <div class="input-group">
+                            <lable class="input--style-2">Item:</lable>
+                            <input  type="text" value="{{mess1.item}}"  name="item">
+                        </div>
+                        <div class="input-group">
+                            <lable class="input--style-2">Price:</lable>
+                            <input  type="text"  value="{{mess1.price}}" name="price">
+                        </div>
+                        <div class="p-t-30">
+                            <button class="btn btn--radius btn--green" type="submit">Update</button>
+                        </div>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

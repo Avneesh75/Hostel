@@ -56,6 +56,9 @@ class Booking(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return self.room
+
 class AdminStudent(models.Model):
     
     First_Name = models.CharField(max_length=50,null=False)
@@ -69,3 +72,25 @@ class AdminStudent(models.Model):
 
     def __str__(self):
         return self.First_Name
+
+class Mess(models.Model):
+    day=models.CharField(max_length=20)
+    item=models.CharField(max_length=20)
+    price=models.IntegerField()
+    created_at=models.DateTimeField(auto_now_add=True)
+    update_at=models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.day
+
+class Notification(models.Model):
+    title=models.CharField(max_length=20)
+    description=models.CharField(max_length=150)
+    status=models.CharField(max_length=50)
+    date=models.DateField(auto_now=True)
+    created_at=models.DateTimeField(auto_now_add=True)
+    update_at=models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.title
+

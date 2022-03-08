@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 {% load static %}
 <html lang="en">
 <head>
@@ -11,7 +10,6 @@
     <title>Document</title>
 </head>
 <body>
-    
     <div class="container">
     <center><h2>Edit Profile</h2></center>
     <center><h4 style="color:red">{{msg}}</h4></center>
@@ -35,7 +33,6 @@
                 <input type="password" placeholder="Confirm Password" class="name" name="cpassword" value="{{s.cpassword}}">
             </span> 
         </div>
-            
             <div class="input-name">
                 <i class="fa fa-phone"></i>
                 <input type="tel" placeholder="Contact" required class="text-name" name="contact" value="{{s.Contact}}">
@@ -44,18 +41,13 @@
                 <i class="fa fa-book"></i>
                 <input type="text" placeholder="Course" required class="name" name="course" value="{{s.Course}}">
             </div>
-            
             <div class="input-name">
                 <i class="	fa fa-calendar"></i>
                 <input type="date" placeholder="Date of Birth" required class="text-name" name="dob" value="{{s.Dob}}">
             </div>
-           
             <div class="input-name">
                 <input type="submit" class="button" value="Update">
-
             </div>
         </div>
     </form>
-    {% endfor %}
-</body>
-</html>
+{% endfor %}

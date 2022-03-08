@@ -1,0 +1,39 @@
+{% extends 'admindash.html' %}
+
+{% block title %}
+
+{% endblock title %}
+
+{% block content %}
+   <div class="col-lg-12">
+       <div class="row justify-content-around ml-8 mt-5">
+           <div class="col-lg-8">
+                   <a href="/roombook/" class='btn btn-danger  float-end'> Room Book</a>
+                   <table class="table table-striped" id="geniustable55" >
+ 
+                        <thead>
+                            <tr>
+                              
+                              <th scope="col">First</th>
+                              <th scope="col">Last</th>
+                              <th scope="col">Amount</th>
+                              <th scope="col">Status</th>
+                            </tr>
+                          </thead>
+                          {% if book %}
+                          <tbody>
+                              {% for i in book %}
+                            <tr>
+                          
+                              <td>{{i.user}}</td>
+                              <td>{{i.user}}</td>
+                              <td>{{i.amount}}</td>
+                              <td>{{i.statu}}</td>
+                            </tr>    
+                            {% endfor %}
+                          </tbody>
+                          {% endif %}
+                        </table>
+           </div>
+           </div>
+{% endblock content %}

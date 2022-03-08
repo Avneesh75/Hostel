@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+    {% block title %}
+    {% endblock %}
+{% block body %}
+<div class="text-center p-3">
+    <h2>Notification</h2>
+<div class="col-lg-10">
+<div class="row justify-content-around mt-5" style="margin-left:155px;">   
+<table class="table table-striped ">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Status</th>  
+    </tr>
+  </thead>
+  {% if noty %}
+  <tbody>
+    {% for i in noty %}
+    <tr>
+      <td>{{i.title}}</td>
+      <td>{{i.description}}</td>
+      <td>{{i.status}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  {% endif %}
+</table>
+</div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'admindash.html' %} 
+{% load static %}
+{% block title %}
+{% endblock %}
+{% block content %}
+
+<div class="page-wrapper bg-red p-t-90 p-b-80 font-robo">
+  <div class="wrapper wrapper--w960">
+    <div class="card card-2">
+      <div class="card-body">
+        <h2 class="title">Notification</h2>
+        <form method="post" action="{% url 'addnotification' %}">
+          {% csrf_token %}
+
+          <div class="input-group">
+            <lable class="input--style-2">Title:</lable>
+            <input type="text" placeholder="abc" name="title" />
+          </div>
+          <div class="input-group">
+            <lable class="input--style-2">Description:</lable>
+            <input
+              type="text"
+              placeholder="This is hostal environment good..."
+              name="desc"
+            />
+          </div>
+          <div class="input-group">
+            <lable class="input--style-2">Status:</lable>
+            <input type="text" placeholder="Allow or Not" name="status" />
+          </div>
+          <div class="p-t-30">
+            <button class="btn btn--radius btn--green" type="submit">
+              Add
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
