@@ -1,0 +1,40 @@
+{% extends 'admindash.html' %}
+
+{% block title %}
+
+{% endblock title %}
+
+{% block content %}
+   <div class="col-lg-8">
+       <div class="row justify-content-around ml-8 mt-5">
+           <div class="col-lg-8">
+                   <a href="{% url 'add_room' %}" class='btn btn-primary my-2  float-end' style="    position: absolute;
+                   margin-left: 102%;">+ Add Room </a>
+                   <table class="table table-striped" id="geniustable55" >
+ 
+                        <thead>
+                            <tr>
+                              
+                              <th scope="col">Sr no.</th>
+                              <th scope="col">Room no</th>
+                              <th scope="col">Rent</th>
+                              <th scope="col">Action</th>
+                            </tr>
+                          </thead>
+                          {% if rom %}
+                          <tbody>
+                              {% for i in rom %}
+                            <tr>
+                          
+                            <td>{{forloop.counter}}</td>
+                              <td>{{i.Room_no}}</td>
+                              <td>{{i.Rent}}</td>
+                              <td><a href="{% url 'edit_room' i.id %}" style="color:black;"><i class="fa fa-eye" aria-hidden="true"></i></a>  &nbsp&nbsp&nbsp<a href="{% url 'delete_room' i.id%}"style="color:black;"><i class="fa fa-trash-o" aria-hidden="true"onclick="return confirm('Are you sure you want to remove')"></i></a></td>
+                            </tr>    
+                            {% endfor %}
+                          </tbody>
+                          {% endif %}
+                        </table>
+           </div>
+           </div>
+{% endblock content %}

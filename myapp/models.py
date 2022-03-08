@@ -22,11 +22,11 @@ class Student(models.Model):
         return self.First_Name
 
 class Room(models.Model):
-    Details = models.CharField(max_length=150)
+    Details = models.CharField(max_length=150,null=True)
     Room_no = models.CharField(max_length=5,null=True)
-    Beds = models.CharField(max_length=5)
-    Rent = models.CharField(max_length=5)
-    Floor = models.CharField(max_length=5)
+    Beds = models.CharField(max_length=5,null=True)
+    Rent = models.CharField(max_length=5,null=True)
+    Floor = models.CharField(max_length=5,null=True)
     Image = models.ImageField(upload_to='room_img',null=True)
 
     def __str__(self):
@@ -82,11 +82,14 @@ class Mess(models.Model):
 
     def __str__(self):
         return self.day
-
+stat = (
+    ('show','show'),
+    ('hide','hide'),
+)
 class Notification(models.Model):
     title=models.CharField(max_length=20)
     description=models.CharField(max_length=150)
-    status=models.CharField(max_length=50)
+    status=models.CharField(max_length=50,choices=stat)
     date=models.DateField(auto_now=True)
     created_at=models.DateTimeField(auto_now_add=True)
     update_at=models.DateTimeField(auto_now=True)

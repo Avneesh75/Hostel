@@ -56,7 +56,7 @@
           </div>
           <ul class="nav-links">
             <li>
-              <a href="adminhome">
+              <a href="/adminhome">
                 <i class="bx bx-home"></i>
                 <span class="links_name">Home</span>
               </a>
@@ -68,6 +68,13 @@
               </a>
             </li>
             <li>
+              <a href="/room/">
+                <i class="fa fa-home" aria-hidden="true"></i>
+                <span class="links_name">Room</span>
+              </a>
+            </li>
+            <li>
+              
               <a href="/roomlist/">
                 <i class="bx bxs-city"></i>
                 <span class="links_name">Room Allotment</span>
@@ -86,6 +93,8 @@
                 <span class="links_name">Notification</span>
               </a>
             </li>
+
+            
             {% comment %}
             <li>
               <a href="visitors.html">
@@ -95,7 +104,7 @@
             </li>
             {% endcomment %}
             <li class="log_out">
-              <a href="#">
+              <a href="{% url 'logout' %}">
                 <i class="bx bx-log-out"></i>
                 <span class="links_name">Log out</span>
               </a>

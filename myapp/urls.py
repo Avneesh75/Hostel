@@ -7,7 +7,7 @@ from .import views
 urlpatterns = [
     path("",views.Home,name="Home"),
     path("index/",views.Index),
-    path('register/',views.Register),
+    path('register/',views.Register,name="register"),
     path('userregister/',views.UserRegister,name='userregister'),
     path('login/',views.Login,name="login"),
     path('userlogin/',views.UserLogin,name='userlogin'),
@@ -30,5 +30,9 @@ urlpatterns = [
     path('adminedit/<int:id>',views.Adminedit,name='adminedit'),
     path('mess/',views.mess,name='mess'),
     path('messedit/<int:id>',views.messedit,name='messedit'),
-    path('messhome/',views.Messhome,name='messhome')
+    path('messhome/',views.Messhome,name='messhome'),
+    path('room/',views.view_room,name='view_room'),
+    path('add-room/',views.add_room,name='add_room'),
+    path('edit-room/<int:id>/',views.edit_room,name='edit_room'),
+    path('delete-room/<int:id>/',views.delete_room,name='delete_room'),
 ]

@@ -10,7 +10,7 @@
   <body>
     <div class="container">
       <div class="wrapper">
-        <div class="title"><span>Student Login</span></div>
+        <div class="title"><span>Login</span></div>
         <center><h3 style="color:red">{{msg}}</h3></center>
         <form action="{% url 'userlogin' %}" method="post">
           {% csrf_token %}
@@ -20,11 +20,10 @@
           <div class="row">
             <input type="password" placeholder="Password" required name="password">
           </div>
-          <div class="pass"><a href="#">Forgot password?</a></div>
           <div class="row button">
             <input type="submit" value="Login">
           </div>
-          <div class="signup-link">Not a member? <a href="#">Signup now</a></div>
+          <div class="signup-link">Not a member? <a href="{% url 'register' %}">Signup now</a></div>
         </form>
       </div>
     </div>

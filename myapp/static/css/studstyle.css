@@ -1,13 +1,9 @@
-body {
-	margin:  0;
-}
 .page-content {
 	width: 100%;
 	margin:  0 auto;
-	background: #75e2e9;
 	display: flex;
-	display: -webkit-flex;
-	justify-content: center;
+	/* display: -webkit-flex; */
+	/* justify-content: center;
 	-o-justify-content: center;
 	-ms-justify-content: center;
 	-moz-justify-content: center;
@@ -16,7 +12,7 @@ body {
 	-o-align-items: center;
 	-ms-align-items: center;
 	-moz-align-items: center;
-	-webkit-align-items: center;
+	-webkit-align-items: center; */
 }
 .form-v4-content  {
 	background: #fff;
@@ -31,7 +27,7 @@ body {
 	-ms-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
 	-moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
 	-webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-	margin: 175px 0;
+	/* margin: 175px 0; */
 	position: relative;
 	display: flex;
 	display: -webkit-flex;
@@ -44,7 +40,6 @@ body {
 	margin-bottom: 34px;
 }
 .form-v4-content .form-left {
-	background: #3786bd;
 	border-top-left-radius: 10px;
 	border-bottom-left-radius: 10px;
 	padding: 20px 40px;
@@ -69,7 +64,7 @@ body {
 	border-bottom-right-radius: 5px;
 	width: 180px;
 	border: none;
-	margin: 15px 0 50px 0px;
+	/* margin: 15px 0 50px 0px; */
 	cursor: pointer;
 	color: #333;
 	font-weight: 700;

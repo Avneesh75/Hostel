@@ -54,11 +54,15 @@ def UserRegister(request):
             else:
                 message = "Password and Confirm Password Doesnot Match"
                 return render(request, 'register.html', {'msg': message})
+    else:
+        return redirect("home")
 
 
 def Login(request):
-    return render(request, 'login.html')
-
+    if not request.user.is_authenticated:
+        return render(request, 'login.html')
+    else:
+        return redirect("Home")
 
 def UserLogin(request):
     if request.method == 'POST':
@@ -79,26 +83,32 @@ def UserLogin(request):
 
 
 def room(request):
-    if request.method == 'POST':
-        student = request.POST['student']
-        room = request.POST['room']
-        amount = request.POST['amount']
-        user = User.objects.get(id=student)
-        room = Room.objects.get(id=room)
-        newuser = Booking.objects.create(
-            user=user, statu="allow", room=room, amount=amount)
-        return redirect("roomlist")
-    room = Room.objects.all()
-    use = Student.objects.all()
-    book = Booking.objects.all()
-    for i in book:
-        room = room.exclude(id=i.room.id)
-    return render(request, 'room.html', {'room': room, 'user': use})
+    if request.user.is_superuser:
+        if request.method == 'POST':
+            student = request.POST['student']
+            room = request.POST['room']
+            amount = request.POST['amount']
+            user = User.objects.get(id=student)
+            room = Room.objects.get(id=room)
+            newuser = Booking.objects.create(
+                user=user, statu="allow", room=room, amount=amount)
+            return redirect("roomlist")
+        room = Room.objects.all()
+        use = Student.objects.all()
+        book = Booking.objects.all()
+        for i in book:
+            room = room.exclude(id=i.room.id)
+        return render(request, 'room.html', {'room': room, 'user': use})
+    else:
+        return redirect("Home")
 
 
 def roollist(request):
-    book = Booking.objects.all()
-    return render(request, "roomlist.html", {'book': book})
+    if request.user.is_superuser:
+        book = Booking.objects.all()
+        return render(request, "roomlist.html", {'book': book})
+    else:
+        return redirect("Home")
 
 
 def Visitors(request):
@@ -106,24 +116,23 @@ def Visitors(request):
 
 
 def studentList(request):
-    stu_data = Student.objects.all()
-    return render(request, 'adminstudent.html', {'studata': stu_data})
+    if request.user.is_superuser:
+        stu_data = Student.objects.all()
+        return render(request, 'adminstudent.html', {'studata': stu_data})
+    else:
+        return redirect("Home")
 
 
 def Adminedit(request, id):
-    data = Student.objects.filter(id=id)
-    return render(request, 'adminedit.html', {'key2': data})
+    if request.user.is_superuser:
+        data = Student.objects.filter(id=id)
+        return render(request, 'adminedit.html', {'key2': data})
 
 
 def view_student(request):
-    data = Student.objects.all()
-    return render(request, 'adminedit.html', {'key2': data})
-
-
-# def get(request):
-#     stu_data = Student.objects.all()
-#     return render(request,'table.html',{'studata':stu_data})
-
+    if request.user.is_superuser:
+        data = Student.objects.all()
+        return render(request, 'adminedit.html', {'key2': data})
 
 def Contactus(request):
     if request.method == 'POST':
@@ -151,35 +160,37 @@ def logout_view(request):
 
 
 def Edit(request):
-    # fetching the data for particular id
-    get_data = Student.objects.filter(user=request.user.id)
-    user = User.objects.get(id=request.user.id)
-    if request.method == 'POST':
-        fname = request.POST['fname']
-        lname = request.POST['lname']
-        contact = request.POST['contact']
-        course = request.POST['course']
-        dob = request.POST['dob']
-        password = request.POST['password']
-        cpassword = request.POST['cpassword']
-        if password == cpassword:
-            Student.objects.filter(user=request.user.id).update(
-                First_Name=fname, Last_Name=lname, Dob=dob, Contact=contact, Course=course)
-            user.set_password(password)
-            user.save()
-            user = authenticate(username=user.username, password=password)
-            if user:
+    if request.user.is_authenticated:
+        get_data = Student.objects.filter(user=request.user.id)
+        user = User.objects.get(id=request.user.id)
+        if request.method == 'POST':
+            fname = request.POST['fname']
+            lname = request.POST['lname']
+            contact = request.POST['contact']
+            course = request.POST['course']
+            dob = request.POST['dob']
+            password = request.POST['password']
+            cpassword = request.POST['cpassword']
+            if password == cpassword:
+                Student.objects.filter(user=request.user.id).update(
+                    First_Name=fname, Last_Name=lname, Dob=dob, Contact=contact, Course=course)
+                user.set_password(password)
+                user.save()
+                user = authenticate(username=user.username, password=password)
+                if user:
 
-                login(request, user)
-            return redirect("Home")
-        else:
-            message = "Password and Confirm Password Doesnot Match"
-            return render(request, 'edit.html', {'msg': message})
-    return render(request, "edit.html", {"key1": get_data})
+                    login(request, user)
+                return redirect("Home")
+            else:
+                message = "Password and Confirm Password Doesnot Match"
+                return render(request, 'edit.html', {'msg': message})
+        return render(request, "edit.html", {"key1": get_data})
+    else:
+        return redirect("Home")
 
 
 def notification(request):
-    notfy = Notification.objects.all()
+    notfy = Notification.objects.filter(status="show")
     return render(request, "notification.html", {'noty': notfy})
 
 
@@ -237,7 +248,10 @@ def AdminReg(request):
 
 def AdminHome(request):
     if request.user.is_superuser:
-        return render(request, "adminhome.html")
+        student = Student.objects.all().count()
+        room = Room.objects.all().count()
+        booking = Booking.objects.all().count()
+        return render(request, "adminhome.html",{'student':student,'room':room,'booking':booking})
     else:
         return redirect("Home")
 
@@ -256,6 +270,8 @@ def AdminLog(request):
         else:
             messages.error(request, "Please check username and password")
             return redirect("login")
+    else:
+        return redirect("Home")
 
 
 def mess(request):
@@ -281,7 +297,7 @@ def messedit(request, id):
 
 
 def Messhome(request):
-    if request.user.is_superuser:
+    if request.user.is_authenticated:
         mess_d = Mess.objects.all()
         return render(request, "messhome.html", {'mess2': mess_d})
     else:
@@ -296,16 +312,55 @@ def Adminnoti(request):
         return redirect("Home")
 
 
+
+
 def Addnotification(request):
     if request.user.is_superuser:
         if request.method == 'POST':
             day = request.POST['title']
             desc = request.POST['desc']
-            stat = request.POST['status']
+            stat = show
 
             newuser = Notification.objects.create(title=day, description=desc, status=stat)
             return redirect("adminnoti")
 
         return render(request, "addnotification.html")
+    else:
+        return redirect("Home")
+
+def view_room(request):
+    if request.user.is_superuser:
+        rom = Room.objects.all()
+        return render(request, "view-room.html", {'rom': rom})
+    else:
+        return redirect("Home")
+
+def add_room(request):
+    if request.user.is_superuser:
+        if request.method=='POST':
+            room = request.POST['room']
+            rent = request.POST['rent']
+            Room.objects.create(Room_no=room,Rent=rent)
+            return redirect("view_room")
+        return render(request, "add-room.html")
+    else:
+        return redirect("Home")
+def edit_room(request ,id):
+    if request.user.is_superuser:
+        rom = Room.objects.get(id=id)
+        if request.method=='POST':
+            rent=request.POST['rent']
+            rom.Rent = rent
+            rom.save()
+            return redirect("view_room")
+        return render(request, "edit-room.html", {'rom': rom})
+    else:
+        return redirect("Home")
+
+def delete_room(request ,id):
+    if request.user.is_superuser:
+        rom = Room.objects.get(id=id)
+        rom.delete()
+        return redirect("view_room")
     else:
         return redirect("Home")

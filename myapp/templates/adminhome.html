@@ -1,85 +1,41 @@
 {% extends 'admindash.html' %}
-{% block title %}Dashboard{% endblock title %}
-{% block body %}
-				<!-- Main Content Area Start -->
-				<div class="content-area">
-					{% if messages %}
-					<div id="alert" class="alert alert-success text-center" role="alert">
-					  {% for msg in messages %}
-					  <h6 class="alert-heading">{{msg}}</h6>
-					  {% endfor %}
-					</div>
-					{% endif %}
+{% block content %}
+<div class="col-lg-9 col-xl-8">
+	<div class="row my-5">
+		<div class="col-lg-3 m-4 col-xl-3 bg-dark d-flex" style="height:40vh;     background-image: linear-gradient(to right, #f85108, #f4ad3c); box-shadow: 2px 2px 5px rgb(0 0 0 / 30%) !important;"> 
+			<div style="padding: 36px 12%;     color: white;
+			font-size: 20px;">
+				Total Room!<br>
+				<p style="font-size: 40px;">{{room}}</p>
+				<p><a href="{% url 'view_room' %}" class="btn btn-light text-dark">View All</a></p>
+			</div>
+			<div  style="padding: 36px 0%;" >
+			<i class="fa fa-home" style="font-size:59px; color:white;" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div class="col-lg-3 m-4 col-xl-3 bg-dark d-flex" style="height:40vh;     background-image: linear-gradient(to right, #129021, #1ed41e); box-shadow: 2px 2px 5px rgb(0 0 0 / 30%) !important;"> 
+			<div style="padding: 36px 12%;     color: white;
+			font-size: 20px;">
+				Total Booking!<br>
+				<p style="font-size: 40px;">{{booking}}</p>
+				<p><a href="{% url 'roomlist' %}" class="btn btn-light text-dark">View All</a></p>
+			</div>
+			<div  style="padding: 36px 0%;" >
+			<i class="fa fa-address-book" style="font-size:59px; color:white;" aria-hidden="true"></i>
+			</div>
+		</div>
+		
 
-
-					<div class="row row-cards-one">
-
-						<div class="col-md-12 col-lg-6 col-xl-4">
-							<div class="mycard bg1">
-								<div class="left">
-									<h5 class="title">Total Faculty! </h5>
-									<span class="number">uuuuuuu</span>
-									<a href="View_faculty" class="link">View
-										All</a>
-								</div>
-								<div class="right d-flex align-self-center">
-									<div class="icon">
-										<i class="fa fa-graduation-cap me-xl-2" aria-hidden="true"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-12 col-lg-6 col-xl-4">
-							<div class="mycard bg2">
-								<div class="left">
-									<h5 class="title">Total Student!</h5>
-									<span class="number">bbbb</span>
-									<a href="#" class="link">View
-										All</a>
-								</div>
-								<div class="right d-flex align-self-center">
-									<div class="icon">
-										<i class="fa fa-male" aria-hidden="true"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-12 col-lg-6 col-xl-4">
-							<div class="mycard bg3">
-								<div class="left">
-									<h5 class="title">Total Accountant!</h5>
-									<span class="number">vvvvvvvv</span>
-									<a href="View_accountant" class="link">View
-										All</a>
-								</div>
-								<div class="right d-flex align-self-center">
-									<div class="icon">
-										<i class="fa fa-credit-card me-xl-2"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-
-						<div class="col-md-12 col-lg-6 col-xl-4">
-							<div class="mycard bg4">
-								<div class="left">
-									<h5 class="title">Total Librarian!</h5>
-									<span class="number">nnnn</span>
-									<a href="View_librarian" class="link">View
-										All</a>
-								</div>
-								<div class="right d-flex align-self-center">
-									<div class="icon">
-										<i class="fa fa-book me-xl-2"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+		<div class="col-lg-3 col-xl-3 bg-dark d-flex m-4" style="height:40vh;         background-image: linear-gradient(to right, #5a49e9, #7a6cf0);; box-shadow: 2px 2px 5px rgb(0 0 0 / 30%) !important;"> 
+			<div style="padding: 36px 12%;     color: white;
+			font-size: 20px;">
+				Total Student!<br>
+				<p style="font-size: 40px;">{{student}}</p>
+				<p><a href="{% url 'studentlist' %}" class="btn btn-light text-dark">View All</a></p>
+			</div>
+			<div  style="padding: 36px 0%;" >
+			<i class="fa fa-user" style="font-size:59px; color:white;" aria-hidden="true"></i>
 			</div>
 		</div>
 	</div>
-	{% endblock body %}
+	{% endblock content %}

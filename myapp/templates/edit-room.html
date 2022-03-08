@@ -1,0 +1,28 @@
+{% extends 'admindash.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+    <h2>Add Room </h2>
+    <div class="form-container"></div>
+    <form action="" method="post" >
+        {% csrf_token %}
+        <div class="input-name">
+            <label for="">Room No:</label>
+            <input type="number" value={{rom.Room_no}} readonly placeholder="Enter Room Number" required class="form-control" name="room">
+        </div>
+        <div class="input-name">
+           
+           
+    <label for="">Rent:</label>
+            <input type="number" placeholder="Enter Rent" value="{{rom.Rent}}" required class="form-control" name="rent">
+    
+        </div>
+           
+            <div class="input-name">
+                <input type="submit" class ="button" value="Update">
+                
+            </div>
+        </div>
+    </form>
+{% endblock content %}
