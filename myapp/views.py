@@ -319,9 +319,9 @@ def Addnotification(request):
         if request.method == 'POST':
             day = request.POST['title']
             desc = request.POST['desc']
-            stat = show
+            
 
-            newuser = Notification.objects.create(title=day, description=desc, status=stat)
+            newuser = Notification.objects.create(title=day, description=desc)
             return redirect("adminnoti")
 
         return render(request, "addnotification.html")
