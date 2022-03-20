@@ -91,7 +91,7 @@ def room(request):
             user = User.objects.get(id=student)
             room = Room.objects.get(id=room)
             newuser = Booking.objects.create(
-                user=user, statu="allow", room=room, amount=amount,type=type)
+                user=user, statu="allow", room=room, amount=amount,Type=type)
             return redirect("roomlist")
         room = Room.objects.all()
         use = Student.objects.all()
@@ -101,7 +101,7 @@ def room(request):
         # if(request.POST.get('mode')=='Offlie-Payment'):
         #     return redirect("view_room")
         # else:
-        
+
         
 
             

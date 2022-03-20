@@ -74,7 +74,7 @@ class Booking(models.Model):
     razorpay_signature = models.CharField(max_length=500,null=True,blank=True)
 
     def __str__(self):
-        return self.room
+        return self.amount
 
 class AdminStudent(models.Model):
     
