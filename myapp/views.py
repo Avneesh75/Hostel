@@ -45,8 +45,7 @@ def UserRegister(request):
 
         else:
             if password == cpassword:
-                user = User.objects.create_user(
-                    username=email, password=password)
+                user = User.objects.create_user(username=email, password=password)
                 newuser = Student.objects.create(user=user, First_Name=fname, Last_Name=lname,
                                                  Contact=contact, Course=course, Gender=gender, Dob=dob, Aadhar_no=aadhar,)
                 messages.error(request, "Register Successfully")
@@ -55,7 +54,7 @@ def UserRegister(request):
                 message = "Password and Confirm Password Doesnot Match"
                 return render(request, 'register.html', {'msg': message})
     else:
-        return redirect("home")
+        return redirect("Home")
 
 
 def Login(request):
@@ -88,16 +87,24 @@ def room(request):
             student = request.POST['student']
             room = request.POST['room']
             amount = request.POST['amount']
+            type = request.POST['type']
             user = User.objects.get(id=student)
             room = Room.objects.get(id=room)
             newuser = Booking.objects.create(
-                user=user, statu="allow", room=room, amount=amount)
+                user=user, statu="allow", room=room, amount=amount,type=type)
             return redirect("roomlist")
         room = Room.objects.all()
         use = Student.objects.all()
         book = Booking.objects.all()
         for i in book:
             room = room.exclude(id=i.room.id)
+        # if(request.POST.get('mode')=='Offlie-Payment'):
+        #     return redirect("view_room")
+        # else:
+        
+        
+
+            
         return render(request, 'room.html', {'room': room, 'user': use})
     else:
         return redirect("Home")

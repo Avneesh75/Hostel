@@ -24,13 +24,33 @@
                 {% endfor %}
             </select>
         </div>
-        <div class="input-name">
-           
-           
-    <label for="">Amount:</label>
-            <input type="number" placeholder="Enter Amount" required class="form-control" name="amount">
-    
+        <div class="input-name">  
+        <label for="">Amount:</label>
+        <input type="number" placeholder="Enter Amount" required class="form-control" name="amount">
         </div>
+        <div class="input-name">  
+            <label for="">Type</label>
+           <select name="type">
+               <option>Select</option>
+               <option>Girls</option>
+               <option>Boys</option>
+           </select>
+         </div>
+        <div class="payment-check">
+            <div class="pc=item">
+                <label for="pc-check">
+                    Offline Payment
+                    <input type="radio" id="pc-check" name="mode" value="Offlie-Payment">
+                </label>
+            </div>
+            <div class="pc=item">
+                <label for="pc-check">
+                    Net Banking
+                    <input type="radio" id="pc-check" name="mode" value="Net Payment">
+                </label>
+            </div>    
+        <div>
+            
            
             <div class="input-name">
                 <input type="submit" class ="button" value="Allot room">
