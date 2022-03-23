@@ -32,7 +32,10 @@ urlpatterns = [
     path('messedit/<int:id>',views.messedit,name='messedit'),
     path('messhome/',views.Messhome,name='messhome'),
     path('room/',views.view_room,name='view_room'),
+    path('pay/',views.pay,name='pay'),
     path('add-room/',views.add_room,name='add_room'),
     path('edit-room/<int:id>/',views.edit_room,name='edit_room'),
+    path('s',views.s,name='s'),
     path('delete-room/<int:id>/',views.delete_room,name='delete_room'),
+    path('success/<str:rpid>/<str:roid>/<str:rsid>',views.Success,name='Success'),
 ]

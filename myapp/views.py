@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views import View
+import razorpay
+from hostal.settings import RAZORPAY_API_KEY,RAZORPAY_API_SECRET_KEY
 # Create your views here.
 
 
@@ -80,19 +82,29 @@ def UserLogin(request):
             messages.error(request, "Please check username and password")
             return redirect("login")
 
-
+client = razorpay.Client(auth=(RAZORPAY_API_KEY,RAZORPAY_API_SECRET_KEY))
 def room(request):
     if request.user.is_superuser:
         if request.method == 'POST':
             student = request.POST['student']
             room = request.POST['room']
             amount = request.POST['amount']
-            type = request.POST['type']
+            Type = request.POST['type']
+            mode = request.POST['mode']
             user = User.objects.get(id=student)
             room = Room.objects.get(id=room)
-            newuser = Booking.objects.create(
-                user=user, statu="allow", room=room, amount=amount,Type=type)
-            return redirect("roomlist")
+            newuser = Booking.objects.create(user=user, statu="allow", room=room, amount=amount,Type=Type)
+            
+            if mode=='Offlie-Payment':
+                return redirect("roomlist")
+            else:
+                Booking_amount = int(amount)*100
+                orderCurrency = 'INR'
+                PaymentOrder = client.order.create(dict(amount=int(Booking_amount),currency=orderCurrency,payment_capture=1))
+                paymentID = PaymentOrder['id']
+                newuser.order_id = paymentID
+                newuser.save()
+                return render(request, "pay.html",{'amount':Booking_amount,'newuser':newuser,"api_key":RAZORPAY_API_KEY,'order_id':paymentID,"user":request.user})
         room = Room.objects.all()
         use = Student.objects.all()
         book = Booking.objects.all()
@@ -101,18 +113,26 @@ def room(request):
         # if(request.POST.get('mode')=='Offlie-Payment'):
         #     return redirect("view_room")
         # else:
-
-        
-
-            
         return render(request, 'room.html', {'room': room, 'user': use})
     else:
         return redirect("Home")
 
+def Success(request,razorpid,razoroid,razorsid):
+    ro = Booking.objects.all()
+    ro = ro[::-1]
+    ro = ro[0]
+    ro.razorpay_payment_id = razorpid
+    ro.razorpay_signature = razorsid
+    ro.razorpay_order_id = razoroid
+    ro.save()
+    return redirect("confirm")
 
+def s(request):
+    return render(request, "success.html")
 def roollist(request):
     if request.user.is_superuser:
         book = Booking.objects.all()
+        
         return render(request, "roomlist.html", {'book': book})
     else:
         return redirect("Home")
@@ -371,3 +391,6 @@ def delete_room(request ,id):
         return redirect("view_room")
     else:
         return redirect("Home")
+
+def pay(request):
+    return render(request, "pay.html")

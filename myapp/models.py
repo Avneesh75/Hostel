@@ -54,6 +54,7 @@ class Booking(models.Model):
     room = models.ForeignKey(Room,models.CASCADE)
     amount = models.CharField(max_length=10,null=True)
     statu = models.CharField(max_length=10,choices=status, null=True)
+    Type = models.CharField(max_length=10,choices=status, null=True)
     booking_date = models.DateField(auto_now_add=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
