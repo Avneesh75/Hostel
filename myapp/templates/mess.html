@@ -5,7 +5,10 @@
     {% endblock %}
 {% block content %}
 <div class="col-lg-8">
-<div class="row justify-content-around ml-8 mt-5">   
+<div class="row justify-content-around ml-8 mt-5"> 
+  <div class="col-lg-8">
+    <a href="/addmess/" class='btn btn-primary my-2  float-end' style="    position: absolute;
+    margin-left: 102%;">+ Add Mess</a>  
 <table class="table table-striped ">
   <h4 style="color: red;"><i><strong>Mess Menu</strong><i></h4>
   <thead>
@@ -25,13 +28,17 @@
       <td>{{i.item}}</td>
       <td>{{i.price}}</td>
       <td>
-        <a href="/messedit/{{i.id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"><strong>Update</strong></i></a>
+        
+        <a href="{% url 'messedit' i.id %}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+        <a href="/messdelete/{{i.id}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+        
       </td>
     </tr>
     {% endfor %}
   </tbody>
   {% endif %}
 </table>
+</div>
 </div>
 </div>
 {% endblock content %}

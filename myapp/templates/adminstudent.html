@@ -33,8 +33,10 @@
                            <td>{{i.Contact}}</td>
                            <td>{{i.Course}}</td>
                            <td>
-                             <a href="/adminedit/{{i.id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"><strong>Edit</strong></i></a>
-                           </td>
+                             <a href="/adminedit/{{i.id}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                            
+                              <a href="/deletestd/{{i.id}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            </td>
                          </tr>    
                          {% endfor %}
                        </tbody>

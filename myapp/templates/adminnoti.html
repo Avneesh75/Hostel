@@ -13,6 +13,7 @@
             <th scope="col">Title</th>
             <th scope="col">Description</th>
             <th scope="col">Status</th>
+            <th scope="col">Action</th>
           </tr>
         </thead>
         {% if noti %}
@@ -22,6 +23,9 @@
             <td>{{i.title}}</td>
             <td>{{i.description}}</td>
             <td>{{i.status}}</td>
+            <td>  
+              <a href="{% url 'deletenoti' i.id %}"><i class="fa fa-trash text-dark pl-4" aria-hidden="true"></i></a>
+            </td>
           </tr>
           {% endfor %}
         </tbody>

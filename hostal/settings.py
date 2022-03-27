@@ -16,6 +16,9 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+
+
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -123,5 +126,5 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-RAZORPAY_API_KEY = 'rzp_test_38CvmQgSPS21iN'
-RAZORPAY_API_SECRET_KEY = 'dR4BfUamCXKMMwA8znHOOzKB'
+RAZORPAY_API_KEY = 'rzp_test_j1VDFdrDAcYDmE'
+RAZORPAY_API_SECRET_KEY = 'HDB2rpw8TDwMOWsFPzIPSrz5'

@@ -5,6 +5,7 @@
     {% block title %}{% endblock %}
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="{% static 'css/admindash.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/visitors.css' %}">
     <link
       href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
       rel="stylesheet"
@@ -84,6 +85,12 @@
               <a href="/mess/">
                 <i class="bx bxs-food-menu"></i>
                 <span class="links_name">Update Mess Menu</span>
+              </a>
+            </li>
+            <li>
+              <a href="/visitors/">
+                <i class="fa fa-users"></i>
+                <span class="links_name">Visitors</span>
               </a>
             </li>
 

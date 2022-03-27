@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/visitors.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+    <h2>Booking Details</h2>
+    <div class="form-container"></div>
+    <form action="">
+        <div class="input-name">
+            <i class="fa fa-user icon"></i>
+            <input type="text" placeholder="First Name" disabled value="{{rom.student.First_Name}}" required class="name">
+            <span>
+                <i class="fa fa-user icon"></i>
+            <input type="text" placeholder="Last Name" disabled value="{{rom.student.Last_Name}}" required class="name">
+            </span>
+        </div>
+            <div class="input-name">
+                <i class="fa fa-home"></i>
+                <input type="email" placeholder="Email" disabled value="{{rom.room}}" class="text-name">
+            </div>
+            <div class="input-name">
+                <i class="fa fa-phone"></i>
+                <input type="tel" placeholder="Room" disabled value="{{rom.student.Contact}}" required class="text-name">
+            </div>
+            <div class="input-name">
+                <i class="fa fa-money"></i>
+                <input type="tel" placeholder="Amount" disabled value="{{rom.amount}}" required class="text-name">
+            </div>
+            <div class="input-name">
+                <i class="fa fa-male"></i>
+                <input type="tel" placeholder="Status" disabled value="{{rom.Type}}" required class="text-name">
+            </div>
+            <div class="input-name">
+                <i class="fa fa-stumbleupon"></i>
+                <input type="tel" placeholder="Type" disabled value="{{rom.statu}}" required class="text-name">
+            </div>
+            {% comment %} <div class="input-name">
+                <input type="submit" class="button" value="Submit">
+
+            </div> {% endcomment %}
+        </div>
+    </form>   
+</body>
+</html>

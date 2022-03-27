@@ -12,7 +12,7 @@
             <select name="student" id="">
                 {% for user in user %}
                
-                <option class="form-control" value="{{user.user.id}}">{{user.First_Name}} {{user.Last_Name}}</option>
+                <option class="form-control" value="{{user.id}}">{{user.First_Name}} {{user.Last_Name}}</option>
                 {% endfor %}
             </select>
         </div>
@@ -50,8 +50,6 @@
                 </label>
             </div>    
         <div>
-            
-           
             <div class="input-name">
                 <input type="submit" class ="button" value="Allot room">
                 

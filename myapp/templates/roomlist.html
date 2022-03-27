@@ -19,6 +19,7 @@
                               <th scope="col">Last</th>
                               <th scope="col">Amount</th>
                               <th scope="col">Status</th>
+                              <th scope="col">Action</th>
                             </tr>
                           </thead>
                           {% if book %}
@@ -30,6 +31,7 @@
                               <td>{{i.user}}</td>
                               <td>{{i.amount}}</td>
                               <td>{{i.statu}}</td>
+                              <td><a href="{% url 'roomdetails' i.id %}"><i class="fa fa-eye  text-dark pl-4" aria-hidden="true"></i></a></td>
                             </tr>    
                             {% endfor %}
                           </tbody>

@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views import View
-import razorpay
+import razorpay 
 from hostal.settings import RAZORPAY_API_KEY,RAZORPAY_API_SECRET_KEY
 # Create your views here.
 
@@ -91,9 +91,9 @@ def room(request):
             amount = request.POST['amount']
             Type = request.POST['type']
             mode = request.POST['mode']
-            user = User.objects.get(id=student)
+            user = Student.objects.get(id=student)
             room = Room.objects.get(id=room)
-            newuser = Booking.objects.create(user=user, statu="allow", room=room, amount=amount,Type=Type)
+            newuser = Booking.objects.create(student=user,user=request.user, statu="allow", room=room, amount=amount,Type=Type)
             
             if mode=='Offlie-Payment':
                 return redirect("roomlist")
@@ -110,9 +110,6 @@ def room(request):
         book = Booking.objects.all()
         for i in book:
             room = room.exclude(id=i.room.id)
-        # if(request.POST.get('mode')=='Offlie-Payment'):
-        #     return redirect("view_room")
-        # else:
         return render(request, 'room.html', {'room': room, 'user': use})
     else:
         return redirect("Home")
@@ -153,7 +150,9 @@ def studentList(request):
 def Adminedit(request, id):
     if request.user.is_superuser:
         data = Student.objects.filter(id=id)
+        
         return render(request, 'adminedit.html', {'key2': data})
+    
 
 
 def view_student(request):
@@ -245,7 +244,7 @@ def AdminReg(request):
             email = request.POST['your_email']
             contact = request.POST['contact']
             course = request.POST['course']
-            gender = request.POST['g']
+            gender = request.POST['gender']
             dob = request.POST['dob']
             aadharimg = request.FILES['aadhrimg']
             profileimg = request.FILES['proimg']
@@ -262,10 +261,10 @@ def AdminReg(request):
                 if password == cpassword:
                     user = User.objects.create_user(
                         username=email, password=password)
-                    newuser = AdminStudent.objects.create(user=user, First_Name=fname,Last_Name=lname,Contact=contact,Course=course,Gender=gender,Dob=dob,Aadhar_pic=aadharimg,Profile_pic=profileimg
+                    newuser = Student.objects.create( First_Name=fname,Last_Name=lname,Contact=contact,Course=course,Gender=gender,Dob=dob,Aadhar_pic=aadharimg,Profile_pic=profileimg
                                                           )
                     messages.error(request, "Register Successfully")
-                    return redirect("login")
+                    return redirect("studentlist")
                 else:
                     message = "Password and Confirm Password Doesnot Match"
                     return render(request, 'admin.html', {'msg': message})
@@ -281,6 +280,11 @@ def AdminHome(request):
         return render(request, "adminhome.html",{'student':student,'room':room,'booking':booking})
     else:
         return redirect("Home")
+
+def Delete_Student(request,id):
+    std = Student.objects.get(id=id)
+    std.delete()
+    return redirect("studentlist")
 
 
 def AdminLog(request):
@@ -308,6 +312,20 @@ def mess(request):
     else:
         return redirect("Home")
 
+def addmess(request):
+    if request.user.is_superuser:
+        if request.method =='POST':
+            day = request.POST['day']
+            item = request.POST['item']
+            price = request.POST['price']
+
+            newuser = Mess.objects.create(day=day,item=item,price=int(price))
+            return redirect("mess")
+        return render(request,'addmess.html')
+    else:
+         return redirect("mess")
+
+
 
 def messedit(request, id):
     if request.user.is_superuser:
@@ -321,6 +339,14 @@ def messedit(request, id):
         return render(request, "messedit.html", {'mess1': mess_data})
     else:
         return redirect("Home")
+
+def Delete_Mess(request,id):
+    data = Mess.objects.get(id=id)
+
+    data.delete()
+    return redirect("mess")
+    
+
 
 
 def Messhome(request):
@@ -338,7 +364,11 @@ def Adminnoti(request):
     else:
         return redirect("Home")
 
+def Delete_noti(request,id):
+    noti = Notification.objects.get(id=id)
 
+    noti.delete()
+    return redirect('adminnoti')
 
 
 def Addnotification(request):
@@ -346,7 +376,6 @@ def Addnotification(request):
         if request.method == 'POST':
             day = request.POST['title']
             desc = request.POST['desc']
-            
 
             newuser = Notification.objects.create(title=day, description=desc)
             return redirect("adminnoti")
@@ -372,6 +401,22 @@ def add_room(request):
         return render(request, "add-room.html")
     else:
         return redirect("Home")
+
+def Show_Details(request,id):
+    rom=Booking.objects.get(id=id)
+    return render(request,'show.html',{'rom':rom})
+
+# def booking_detail(request,id):
+#     rom=Booking.objects.get(id=id)
+#     return render(request,"show.html",{'rom':rom})
+
+        
+
+    
+
+
+    
+
 def edit_room(request ,id):
     if request.user.is_superuser:
         rom = Room.objects.get(id=id)

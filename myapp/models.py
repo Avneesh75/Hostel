@@ -15,9 +15,10 @@ class Student(models.Model):
     Last_Name = models.CharField(max_length=50,null=False)
     Dob = models.DateField(auto_now=False,null=True)
     Contact = models.CharField(max_length=15,null=False)
-    Aadhar_no = models.ImageField(upload_to="img/")
-    Course = models.CharField(max_length=20)
-    Gender = models.CharField(choices=gender,max_length=15)
+    Aadhar_pic = models.ImageField(upload_to="img/",null=True)
+    Profile_pic = models.ImageField(upload_to="img/",null=True)
+    Course = models.CharField(max_length=20,null=True)
+    Gender = models.CharField(choices=gender,max_length=15,null=True)
 
     def __str__(self):
         return self.First_Name
@@ -51,6 +52,7 @@ status = (
     )
 class Booking(models.Model):
     user = models.ForeignKey(User,models.CASCADE)
+    student = models.ForeignKey(Student,on_delete=models.CASCADE,null=True)
     room = models.ForeignKey(Room,models.CASCADE)
     amount = models.CharField(max_length=10,null=True)
     statu = models.CharField(max_length=10,choices=status, null=True)
@@ -86,7 +88,7 @@ class AdminStudent(models.Model):
     Aadhar_pic = models.ImageField(upload_to="img/")
     Profile_pic = models.ImageField(upload_to="img/")
     Course = models.CharField(max_length=20)
-    #Gender = models.CharField(choices=gender,max_length=15)
+    Gender = models.CharField(choices=gender,max_length=15)
 
     def __str__(self):
         return self.First_Name
