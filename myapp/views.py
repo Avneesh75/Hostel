@@ -149,8 +149,15 @@ def studentList(request):
 
 def Adminedit(request, id):
     if request.user.is_superuser:
-        data = Student.objects.filter(id=id)
-        
+        data = Student.objects.get(id=id)
+        if request.method=='POST':
+            data.First_Name=request.POST['finame']
+            data.Last_Name=request.POST['laname']
+            data.Contact=request.POST['cont']
+            data.Course=request.POST['cour']
+            data.save()
+
+            return redirect("studentlist")
         return render(request, 'adminedit.html', {'key2': data})
     
 
